@@ -239,6 +239,29 @@ void ELClientMqtt::publish(const __FlashStringHelper* topic, const __FlashString
   _elc->Request();
 }
 
+/*! publish(const __FlashStringHelper* topic, const __FlashStringHelper* data,  uint8_t qos, uint8_t retain)
+@brief Subscribe to MQTT topic
+@details Sends the MQTT subscription request to the ESP with the topic and data stored in program memory
+@param topic
+  Topic name
+@param data
+  Pointer to data buffer
+@param qos
+  (optional) Requested qos level, default 0
+@param retain
+  (optional) Requested retain level, default 0
+@warning At the moment only qos level 0 is implemented and supported!
+@par Example
+@code
+  no example code yet
+@endcode
+*/
+void ELClientMqtt::publish(const __FlashStringHelper* topic, const __FlashStringHelper* data,
+    uint8_t qos, uint8_t retain)
+{
+	publish(topic, data, strlen_P((const char*)data), qos, retain);
+}
+
 /*! ELClientMqtt::publish(const char* topic, const __FlashStringHelper* data, const uint16_t len, uint8_t qos, uint8_t retain)
 @brief Subscribe to MQTT topic
 @details Sends the MQTT subscription request to the ESP with the data stored in program memory
@@ -299,4 +322,29 @@ void ELClientMqtt::publish(const __FlashStringHelper* topic, const uint8_t* data
   _elc->Request(&qos, 1);
   _elc->Request(&retain, 1);
   _elc->Request();
+}
+
+/*! publish(const __FlashStringHelper* topic, const char* data, const uint16_t len, uint8_t qos, uint8_t retain)
+@brief Subscribe to MQTT topic
+@details Sends the MQTT subscription request to the ESP with the topic and data stored in program memory
+@param topic
+  Topic name
+@param data
+  Pointer to data buffer
+@param len
+  Size of data buffer
+@param qos
+  (optional) Requested qos level, default 0
+@param retain
+  (optional) Requested retain level, default 0
+@warning At the moment only qos level 0 is implemented and supported!
+@par Example
+@code
+  no example code yet
+@endcode
+*/
+void ELClientMqtt::publish(const __FlashStringHelper* topic, const char* data,
+    const uint16_t len, uint8_t qos, uint8_t retain)
+{
+  publish(topic, (uint8_t*)data, strlen(data), qos, retain);
 }

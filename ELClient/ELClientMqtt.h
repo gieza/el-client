@@ -48,10 +48,14 @@ class ELClientMqtt {
         uint8_t qos=0, uint8_t retain=0);
     void publish(const __FlashStringHelper* topic, const __FlashStringHelper* data,
         const uint16_t len, uint8_t qos=0, uint8_t retain=0);
-    void publish(const char* topic, const __FlashStringHelper* data,
+    void publish(const __FlashStringHelper* topic, const __FlashStringHelper* data,
+        uint8_t qos=0, uint8_t retain=0);
+	void publish(const char* topic, const __FlashStringHelper* data,
         const uint16_t len, uint8_t qos=0, uint8_t retain=0);
     void publish(const __FlashStringHelper* topic, const uint8_t* data,
         const uint16_t len, uint8_t qos=0, uint8_t retain=0);
+    void publish(const __FlashStringHelper* topic, const char* data,
+        const uint16_t len, uint8_t qos=0, uint8_t retain=0); 
 
     // set a last-will topic & message
     void lwt(const char* topic, const char* message, uint8_t qos=0, uint8_t retain=0);
